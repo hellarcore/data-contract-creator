@@ -1,0 +1,56 @@
+name: Deploy site
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy site to AWS S3
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-region: ${{ secrets.AWS_REGION }}
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+
+    - name: Setup Rust
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: stable
+        target: wasm32-unknown-unknown
+
+    - name: Setup Cargo cache
+      uses: Swatinem/rust-cache@v2
+      with:
+        shared-key: rust-cargo
+
+    - name: Build
+      run: |
+        cargo install --locked trunk
+        trunk build --release
+
+    - name: Output branch name
+      id: branch_condition
+      run: |
+        if [ "${GITHUB_REF##*/}" = "master" ]; then
+          echo ::set-output name=branch::""
+        else
+          echo ::set-output name=branch::"branches/${GITHUB_REF##*/}"
+        fi
+
+    - name: Copy site to s3 with the AWS CLI
+      run: |
+        aws --region ${{ secrets.AWS_REGION }} s3 sync --acl private dist/ s3://${{ secrets.S3_BUCKET }}/${{ secrets.S3_PREFIX }}/${{ steps.branch_condition.outputs.branch }}
+
+    - name: Request CloudFront invalidation of all objects
+      run: |
+        aws --region ${{ secrets.AWS_REGION }} cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
