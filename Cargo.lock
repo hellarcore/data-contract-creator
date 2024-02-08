@@ -403,7 +403,7 @@ dependencies = [
 
 [[package]]
 name = "hellarpay-contract"
-version = "0.24.0-dev.1"
+version = "1.0.0-dev.1"
 source = "git+https://github.com/pauldelucia/platform.git#fab8e5462857a209e74089721a4613afb780f54f"
 dependencies = [
  "lazy_static",
@@ -427,7 +427,7 @@ dependencies = [
 
 [[package]]
 name = "data-contracts"
-version = "0.24.0-dev.1"
+version = "1.0.0-dev.1"
 source = "git+https://github.com/pauldelucia/platform.git#fab8e5462857a209e74089721a4613afb780f54f"
 dependencies = [
  "hellarpay-contract",
@@ -473,7 +473,7 @@ dependencies = [
 
 [[package]]
 name = "hpns-contract"
-version = "0.24.0-dev.1"
+version = "1.0.0-dev.1"
 source = "git+https://github.com/pauldelucia/platform.git#fab8e5462857a209e74089721a4613afb780f54f"
 dependencies = [
  "serde_json",
@@ -578,7 +578,7 @@ dependencies = [
 
 [[package]]
 name = "feature-flags-contract"
-version = "0.24.0-dev.1"
+version = "1.0.0-dev.1"
 source = "git+https://github.com/pauldelucia/platform.git#fab8e5462857a209e74089721a4613afb780f54f"
 dependencies = [
  "serde_json",
@@ -1129,7 +1129,7 @@ dependencies = [
 
 [[package]]
 name = "masternode-reward-shares-contract"
-version = "0.24.0-dev.1"
+version = "1.0.0-dev.1"
 source = "git+https://github.com/pauldelucia/platform.git#fab8e5462857a209e74089721a4613afb780f54f"
 dependencies = [
  "serde_json",
@@ -2304,7 +2304,7 @@ dependencies = [
 
 [[package]]
 name = "withdrawals-contract"
-version = "0.24.0-dev.1"
+version = "1.0.0-dev.1"
 source = "git+https://github.com/pauldelucia/platform.git#fab8e5462857a209e74089721a4613afb780f54f"
 dependencies = [
  "serde_json",

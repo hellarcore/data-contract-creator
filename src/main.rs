@@ -1,8 +1,8 @@
-//! Dash Platform Data Contract Creator
+//! Hellar Platform Data Contract Creator
 //! 
 //! This web app allows users to generate data contract schemas using ChatGPT and a dynamic form. 
 //! They also have the ability to import existing contracts and edit them. 
-//! The schemas are validated against Dash Platform Protocol and error messages are provided if applicable.
+//! The schemas are validated against Hellar Platform Protocol and error messages are provided if applicable.
 
 use std::{collections::{HashMap, HashSet}, sync::Arc};
 use serde::{Serialize, Deserialize};
@@ -22,22 +22,22 @@ use web_sys::console;
 
 // Context prepended to the first user-input prompt, when creating a new contract
 const FIRST_PROMPT_PRE: &str = r#"
-I'm going to ask you to generate a Dash Platform data contract after giving you some context and rules. 
+I'm going to ask you to generate a Hellar Platform data contract after giving you some context and rules. 
 
 *Background info*: 
-Dash Platform is a blockchain for decentralized applications that are backed by data contracts. 
+Hellar Platform is a blockchain for decentralized applications that are backed by data contracts. 
 Data contracts are JSON schemas that are meant to define the structures of data an application can store. 
 They must define at least one document type, where a document type defines a type of document that can be submitted to a data contract.
 
 *Example*: 
 Here is an example of a data contract with one document type, "nft":
 
-{"nft":{"type":"object","properties":{"name":{"type":"string","description":"Name of the NFT token","maxLength":63},"description":{"type":"string","description":"Description of the NFT token","maxLength":256},"imageUrl":{"type":"string","description":"URL of the image associated with the NFT token","maxLength":2048,"format":"uri"},"imageHash":{"type":"array","description":"SHA256 hash of the bytes of the image specified by tokenImageUrl","byteArray":true,"minItems":32,"maxItems":32},"imageFingerprint":{"type":"array","description":"dHash the image specified by tokenImageUrl","byteArray":true,"minItems":8,"maxItems":8},"price":{"type":"number","description":"Price of the NFT token in Dash","minimum":0},"quantity":{"type":"integer","description":"Number of tokens in circulation","minimum":0},"metadata":{"type":"array","description":"Any additional metadata associated with the NFT token","byteArray":true,"minItems":0,"maxItems":2048}},"indices":[{"name":"price","properties":[{"price":"asc"}]},{"name":"quantity","properties":[{"quantity":"asc"}]},{"name":"priceAndQuantity","properties":[{"price":"asc"},{"quantity":"asc"}]}],"required":["name","price","quantity"],"additionalProperties":false}}
+{"nft":{"type":"object","properties":{"name":{"type":"string","description":"Name of the NFT token","maxLength":63},"description":{"type":"string","description":"Description of the NFT token","maxLength":256},"imageUrl":{"type":"string","description":"URL of the image associated with the NFT token","maxLength":2048,"format":"uri"},"imageHash":{"type":"array","description":"SHA256 hash of the bytes of the image specified by tokenImageUrl","byteArray":true,"minItems":32,"maxItems":32},"imageFingerprint":{"type":"array","description":"dHash the image specified by tokenImageUrl","byteArray":true,"minItems":8,"maxItems":8},"price":{"type":"number","description":"Price of the NFT token in Hellar","minimum":0},"quantity":{"type":"integer","description":"Number of tokens in circulation","minimum":0},"metadata":{"type":"array","description":"Any additional metadata associated with the NFT token","byteArray":true,"minItems":0,"maxItems":2048}},"indices":[{"name":"price","properties":[{"price":"asc"}]},{"name":"quantity","properties":[{"quantity":"asc"}]},{"name":"priceAndQuantity","properties":[{"price":"asc"},{"quantity":"asc"}]}],"required":["name","price","quantity"],"additionalProperties":false}}
 
 While this example data contract only has one document type, data contracts should usually have more than one. For example, the example "nft" data contract could also have document types for "listing" and "transaction". Maybe the developer also wants to have user profiles, so they could include a "userProfile" document type.
 
 *Requirements*: 
-The following requirements must be met in Dash Platform data contracts: 
+The following requirements must be met in Hellar Platform data contracts: 
  - Indexes may only have "asc" sort order. 
  - All "string" properties that are used in indexes must specify "maxLength", which must be no more than 63. 
  - All "array" properties that are used in indexes must specify "maxItems", and it must be less than or equal to 255. 
@@ -59,10 +59,10 @@ App description:
 
 // Context prepended to user-input prompts after the first prompt. The current schema comes after this, then the user-input context.
 const SECOND_PROMPT_PRE: &str = r#"
-I'm going to ask you to make some changes to a Dash Platform data contract after giving you some context and rules. 
+I'm going to ask you to make some changes to a Hellar Platform data contract after giving you some context and rules. 
 
 *Requirements*:
-The following requirements must be met in Dash Platform data contracts: 
+The following requirements must be met in Hellar Platform data contracts: 
  - Indexes may only have "asc" sort order. 
  - All "array" properties must specify "byteArray": true. 
  - All "string" properties that are used in indexes must specify "maxLength", which must be no more than 63. 
@@ -70,7 +70,7 @@ The following requirements must be met in Dash Platform data contracts:
  - All "object" properties must define at least 1 property within themselves. 
 
 *Changes to be made*: 
-Make the following change(s) to this Dash Platform data contract JSON schema, along with any other changes that are necessary to make it valid according to the rules above. 
+Make the following change(s) to this Hellar Platform data contract JSON schema, along with any other changes that are necessary to make it valid according to the rules above. 
 Note that the highest-level keys in the data contract are called "document types".
 Do not explain anything or return anything else other than a properly formatted JSON schema:
 
@@ -1994,7 +1994,7 @@ impl Component for Model {
             <main class="home">
                 <body>
                     <div class="top-section_ai">
-                        <img class="logo_ai" src="https://media.hellar.io/wp-content/uploads/hellar-logo.svg" alt="Dash logo" width="100" height="50" />
+                        <img class="logo_ai" src="https://media.hellar.io/wp-content/uploads/hellar-logo.svg" alt="Hellar logo" width="100" height="50" />
                         <h1 class="header_ai">{"Data Contract Creator"}</h1>
                     </div>
                     <div class="container_ai">
@@ -2116,7 +2116,7 @@ impl Component for Model {
                         <a href="https://github.com/hellarcore/data-contract-creator" target="_blank">
                             <div class="icon-el github"></div>
                         </a>
-                        <p>{"© 2023 Dashpay"}</p>
+                        <p>{"© 2023 Hellarpay"}</p>
                     </footer>
                 </body>
             </main>

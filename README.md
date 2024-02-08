@@ -4,15 +4,15 @@
 
 # Data Contract Creator
 
-This is a web app, hosted at [hellar.io](https://hellar.io/), to help people intuitively create and edit Dash Platform data contracts. There are three options available for getting started. Users can:
+This is a web app, hosted at [hellar.io](https://hellar.io/), to help people intuitively create and edit Hellar Platform data contracts. There are three options available for getting started. Users can:
 
 1. Use the ChatGPT widget to automatically generate a data contract based on the provided context.
 2. Manually fill out a dynamic form.
 3. Import an existing data contract and edit it.
 
-The app also validates the data contracts against Dash Platform Protocol, so users can save time and money by validating before actually submitting data contracts to Dash Platform.
+The app also validates the data contracts against Hellar Platform Protocol, so users can save time and money by validating before actually submitting data contracts to Hellar Platform.
 
-In the future, users will be able to register data contracts to Dash Platform directly from the web app. However, for now, they must use the [JavaScript SDK](https://hellar.io/platform/readme/docs/tutorial-register-a-data-contract), where they can copy and paste the contracts generated from here.
+In the future, users will be able to register data contracts to Hellar Platform directly from the web app. However, for now, they must use the [JavaScript SDK](https://hellar.io/platform/readme/docs/tutorial-register-a-data-contract), where they can copy and paste the contracts generated from here.
 
 This app is built in Rust using the Yew framework and WebAssembly.
 
@@ -21,7 +21,7 @@ This app is built in Rust using the Yew framework and WebAssembly.
 - Use ChatGPT to generate and modify Platform-compliant (usually) data contracts
 - Dynamically create and modify data contracts using a web interface
 - Import existing data contract schemas for editing
-- Validate data contract schemas against Dash Platform Protocol rules
+- Validate data contract schemas against Hellar Platform Protocol rules
 
 ## Usage
 
@@ -68,7 +68,7 @@ export AR=${AR_PATH} CC=${CLANG_PATH} ${BINDGEN_COMMAND}
 
 ## Future work
 
-Once a wallet capable of authentication is available for Dash Platform, this app should integrate a "connect wallet" button so the generated data contract can be directly registered on Dash Platform from [hellar.io](https://hellar.io/).
+Once a wallet capable of authentication is available for Hellar Platform, this app should integrate a "connect wallet" button so the generated data contract can be directly registered on Hellar Platform from [hellar.io](https://hellar.io/).
 
 ## Contributing
 
